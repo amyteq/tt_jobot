@@ -1,0 +1,71 @@
+# compiled output
+/dist
+/node_modules
+/build
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# GCP Credentials
+gcp-service-account.json
+*.key.json
+
+# Terraform
+terraform/.terraform/
+terraform/**/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.*
+terraform/**/*.tfstate
+terraform/**/*.tfstate.*
+terraform/.terraform.lock.hcl
+terraform/**/.terraform.lock.hcl
+
+# Misc
+.cache
+temp/
+tmp/
+DB_STATUS.txt
+docs/architecture/
+SCHEMA_SUMMARY.txt
+.cursor/plans/
+
+# Generated code (do not commit large generated trees)
+src/shared/zod/schemas/
+prisma/dev.db
+
+# Documentation
+docs/TENANT_GUARD_IMPLEMENTATION.md
+src/shared/guards/README.md
+scripts/git-*.sh

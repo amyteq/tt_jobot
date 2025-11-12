@@ -1,0 +1,70 @@
+{
+  "C_Cpp.errorSquiggles": "disabled",
+  "cmake.ignoreCMakeListsMissing": true,
+  "local-history.enabled": 0,
+  "workbench.editorAssociations": {
+    "SAVE_DATA*": "hexEditor.hexedit",
+    "*.dat": "hexEditor.hexedit",
+    "*.md": "default",
+  },
+  "files.associations": {
+    "SAVE_DATA": "hexEditor.hexedit",
+    "SAVE_DATA*": "code-text-binary"
+  },
+  // java, gradle
+  "java.autobuild.enabled": false,
+  "gradle.autoDetect": "off",
+  "editor.formatOnSave": false,
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+  "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home",
+      "default": true
+    }
+  ],
+  // "editor.parameterHints.enabled": false,
+  // "open-in-browser.default": "chrome",
+  "java.inlayHints.parameterNames.enabled": "none",
+  "java.test.config": {
+    "workingDirectory": "${workspaceFolder}",
+    "vmArgs": ["-Dspring.profiles.active=test"],
+    "envFile": "${workspaceFolder}/.vscode/.env.local"
+  },
+  // "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms1G -Xlog:disable",
+  "java.configuration.updateBuildConfiguration": "interactive",
+  // "java.format.settings.profile": "GoogleStyle",
+  // "java.format.settings.url": ".vscode/java-formatter.xml",
+  "java.saveActions.organizeImports": true,
+
+  // python
+  "python.linting.enabled": false,
+  "python.formatting.provider": "none",
+  "python.terminal.executeInFileDir": false,
+  "python.testing.enabled": false,
+  "python.defaultInterpreterPath": "${env:HOME}/.pyenv/versions/3.12.7/bin/python",
+  "python.analysis.autoSearchPaths": false,
+  "python.analysis.enablePytestSupport": false,
+  "python.analysis.experimentalserver": false,
+  "python.experiments.enabled": false,
+  "python.testing.autoTestDiscoverOnSaveEnabled": false,
+  "python.testing.promptToConfigure": false,
+  "C_Cpp.enhancedColorization": "enabled",
+
+  // other
+  "workbench.colorCustomizations": {
+    "editor.foreground": "#00cc00",
+    // "settings.textInputForeground": "#37373d"
+  },
+  "editor.tokenColorCustomizations": {
+    "[Default Dark Modern]": {
+      "comments": "#00ff00"
+    }
+  },
+  "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
+  "markdown-preview-enhanced.previewTheme": "github-light.css",
+  "workbench.colorTheme": "Default Dark Modern",
+  "python.languageServer": "None"
+}
