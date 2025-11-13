@@ -1,0 +1,64 @@
+app:
+  env: prod
+  base_url: "https://your-api.example.com"
+  timezone: "Australia/Melbourne"
+
+providers:
+  llm:
+    base_url: "https://your-llm-endpoint/v1"
+    api_key: "${LLM_API_KEY}"
+    model: "gpt-4o-mini"
+    timeout_s: 60
+  embeddings:
+    model: "text-embedding-3-large"
+    dim: 3072
+
+storages:
+  postgres:
+    dsn: "postgresql+psycopg://user:pass@db:5432/jobot"
+    use_pgvector: true
+  s3:
+    endpoint: "http://minio:9000"
+    bucket: "jobot"
+    access_key: "${S3_KEY}"
+    secret_key: "${S3_SECRET}"
+
+notifiers:
+  slack:
+    bot_token: "${SLACK_BOT_TOKEN}"
+    channel: "#job-alerts"
+  email:
+    smtp_host: "smtp.gmail.com"
+    smtp_port: 587
+    username: "${SMTP_USER}"
+    password: "${SMTP_PASS}"
+
+sites:
+  seek:
+    enabled: true
+    credentials:
+      email: "you@example.com"
+      password: "${SEEK_PASS}"
+    region: "AU"
+  linkedin:
+    enabled: true
+    cookies_path: "./secrets/linkedin_cookies.json"
+    easy_apply_only: true
+  toptal:
+    enabled: false
+
+rules:
+  location_allow: ["Melbourne", "Sydney", "Remote-AU"]
+  industry_allow: ["Software", "Data", "AI/ML"]
+  seniority: ["Mid", "Senior", "Staff"]
+  skills_must: ["Python", "FastAPI", "Postgres"]
+  skills_nice: ["TypeScript", "AWS", "Kubernetes"]
+  min_score: 0.70
+
+apply:
+  human_in_loop: true
+  attach_cover_letter: true
+  rate_limit:
+    per_site_per_hour: 20
+  captcha:
+    provider: "manual" # or external solver id

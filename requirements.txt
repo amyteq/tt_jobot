@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+asyncpg # Or psycopg2 for sync
+psycopg2-binary # if using sync postgres
+pgvector
+temporalio
+python-dotenv
+pyyaml
+httpx # For http requests in clients
+unstructured[all-docs] # For resume parsing
+playwright # For web scraping

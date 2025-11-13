@@ -27,30 +27,49 @@ Jobot is a Python full-stack MVP for automating job discovery, resume tailoring,
 ## Directory Structure
 
 ```
-jobot/
-  apps/
-    api/               # FastAPI REST/Webhook API
-    workers/           # Temporal workers (activities/workflows)
-    mcp_servers/
-      seek/            # MCP server: Seek login/scrape/details
-      linkedin/        # MCP server: LinkedIn login/scrape
-      notifier/        # MCP server: Slack/Email notifications
-      resume/          # MCP server: Resume parsing/export
-  core/
-    models/            # SQLAlchemy models & Alembic migrations
-    embeddings/        # Embedding utilities
-    templates/         # Email/cover letter templates
-    prompts/           # LLM prompt templates
-  infra/
-    docker/            # Dockerfiles
-    migrations/
-  configs/
-    config.yaml        # App configuration
-  scripts/
-    seed_demo_data.py
-  docker-compose.yml
-  pyproject.toml
-  README.md
+.
+├── app/
+│   ├── __init__.py
+│   ├── main.py                # FastAPI 应用入口
+│   ├── config.py              # 配置加载与 Pydantic 模型
+│   ├── db/                    # 数据库相关
+│   │   ├── __init__.py
+│   │   ├── models.py          # SQLAlchemy 模型
+│   │   └── database.py        # 数据库连接与会话
+│   ├── services/              # 核心业务逻辑，如职位匹配、简历优化
+│   │   ├── __init__.py
+│   │   ├── job_matching.py
+│   │   └── resume_optimizer.py
+│   ├── api/                   # FastAPI 路由与控制器
+│   │   ├── __init__.py
+│   │   ├── endpoints/
+│   │   │   ├── __init__.py
+│   │   │   ├── jobs.py
+│   │   │   └── applications.py
+│   │   └── schemas.py         # Pydantic 请求/响应模型
+│   └── workers/               # Temporal worker 定义
+│       ├── __init__.py
+│       ├── activities.py      # Temporal Activities
+│       └── workflows.py       # Temporal Workflows
+├── clients/                   # 外部服务客户端，如求职网站爬虫、LLM 客户端、Slack 客户端
+│   ├── __init__.py
+│   ├── scraper_mcp_client.py  # MCP 客户端，用于调用各种工具
+│   ├── llm_client.py
+│   └── slack_client.py
+├── config/
+│   └── config.yaml            # 默认配置文件
+├── tests/
+│   ├── __init__.py
+│   ├── unit/
+│   └── integration/
+├── .env.example               # 环境变量示例
+├── requirements.txt           # Python 依赖
+├── Dockerfile                 # Docker 构建文件
+├── docker-compose.yml         # Docker Compose 文件
+├── README.md
+└── scripts/                   # 辅助脚本，如数据库迁移、数据初始化
+    ├── __init__.py
+    └── init_db.py
 ```
 
 ## Quick Start

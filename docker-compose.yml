@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  db:
+    image: ankane/pgvector:v0.5.0
+    restart: always
+    environment:
+      POSTGRES_DB: jobot
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
+  temporal:
+    image: temporalio/auto-setup:1.20.0
+    environment:
+      - DB=postgresql
+      - POSTGRES_SEEDS=db:5432
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DATABASE=jobot
+      - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development.yaml
+      - ENABLE_METRIC=true
+    ports:
+      - "7233:7233"
+    depends_on:
+      - db
+
+  temporal-ui:
+    image: temporalio/ui:2.19.1
+    environment:
+      - TEMPORAL_GRPC_ENDPOINT=temporal:7233
+    ports:
+      - "8080:8080"
+    depends_on:
+      - temporal
+
+  app:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app
+      - /app/secrets # For LinkedIn cookies etc.
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_DSN=postgresql+psycopg://user:pass@db:5432/jobot
+      # Add other environment variables from .env.example here or use a .env file
+    depends_on:
+      - db
+      - minio
+      - temporal
+
+  worker:
+    build: .
+    command: python -m app.workers.cli
+    volumes:
+      - .:/app
+    environment:
+      - POSTGRES_DSN=postgresql+psycopg://user:pass@db:5432/jobot
+      # Add other environment variables from .env.example here or use a .env file
+    depends_on:
+      - db
+      - temporal
+      - app
+
+volumes:
+  pgdata:
+  minio_data:
